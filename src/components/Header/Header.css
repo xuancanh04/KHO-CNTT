@@ -1,0 +1,343 @@
+/* Header Section */
+.header {
+  background: #ffffff;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
+  flex-shrink: 0;
+  min-height: 80px;
+}
+
+.header-left {
+  flex: 1;
+  max-width: 60%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 320px;
+}
+
+.logo-section {
+  margin-bottom: 0;
+}
+
+.hospital-logo {
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: brightness(0.9) contrast(1.5) saturate(1.2);  
+  opacity: 1;
+  mix-blend-mode: normal;  
+}
+
+.header-right {
+  flex: 1;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: auto;
+  min-width: 150px;
+  padding-left: 30px;
+  max-width: 40%;
+}
+
+/* User Account Section */
+.user-account-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: flex-end;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.user-name {
+  font-weight: 600;
+  color: #333;
+  font-size: 16px;
+}
+
+.user-role {
+  font-size: 13px;
+  color: #666;
+  font-weight: 500;
+}
+
+.logout-button {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 8px rgba(238, 90, 36, 0.3);
+}
+
+.logout-button:hover {
+  background: linear-gradient(135deg, #ee5a24 0%, #d63031 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(238, 90, 36, 0.4);
+}
+
+.logout-icon {
+  font-size: 16px;
+}
+
+.search-section {
+  margin-bottom: 25px;
+}
+
+.search-form {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.search-input {
+  padding: 12px 18px;
+  border: 2px solid #ddd;
+  border-radius: 30px;
+  width: 280px;
+  font-size: 15px;
+}
+
+.search-button {
+  background: #ff0000;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 15px;
+}
+
+.search-button:hover {
+  background: #cc0000;
+  transform: translateY(-2px);
+}
+
+.auth-links {
+  margin-bottom: 25px;
+}
+
+.auth-link {
+  color: #008000;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.auth-link:hover {
+  color: #006000;
+}
+
+.contact-info {
+  text-align: right;
+  margin-top: -30px;
+  transform: translateY(-10px);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #555;
+  min-width: 350px;
+}
+
+.contact-item .icon {
+  font-size: 16px;
+  min-width: 25px;
+  text-align: center;
+}
+
+.contact-item span:last-child {
+  flex: 1;
+  text-align: left;
+}
+
+/* Văn bản cố định - không thay đổi khi chuyển đổi ngôn ngữ */
+.fixed-text {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  pointer-events: none;
+  content: attr(data-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.address-bold {
+  font-weight: bold;
+  color: #000000;  
+}
+
+.phone-bold {
+  font-weight: bold;
+  color: #ff0000;  
+}
+
+/* Responsive - Giữ nguyên bố cục */
+@media (max-width: 1200px) {
+  .header {
+    padding: 15px 25px;
+    min-height: 70px;
+  }
+  
+  .hospital-logo {
+    max-width: 350px;
+  }
+  
+  .contact-item {
+    min-width: 300px;
+  }
+}
+
+@media (max-width: 992px) {
+  .header {
+    padding: 15px 20px;
+    min-height: 65px;
+  }
+  
+  .hospital-logo {
+    max-width: 300px;
+  }
+  
+  .contact-item {
+    min-width: 250px;
+  }
+  
+  .header-right {
+    padding-left: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+    padding: 15px 20px;
+    min-height: auto;
+  }
+  
+  .header-left {
+    max-width: 100%;
+    justify-content: center;  /* Căn giữa trên mobile */
+    padding-right: 0;  /* Bỏ padding trên mobile */
+  }
+  
+  .header-right {
+    text-align: center;
+    min-height: auto;
+    justify-content: center;
+    padding-left: 0;
+    max-width: 100%;
+  }
+  
+  .user-account-section {
+    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .user-info {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .user-details {
+    align-items: center;
+  }
+  
+  .search-form {
+    justify-content: center;
+  }
+  
+  .contact-info {
+    margin-top: 10px;
+  }
+  
+  .contact-item {
+    justify-content: center;
+    min-width: auto;
+    text-align: center;
+  }
+  
+  .contact-item span:last-child {
+    text-align: center;
+  }
+  
+  .hospital-logo {
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 10px 15px;
+  }
+  
+  .hospital-logo {
+    max-width: 200px;
+  }
+  
+  .contact-item {
+    font-size: 13px;
+  }
+  
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+  
+  .logout-button {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+}

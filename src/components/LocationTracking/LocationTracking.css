@@ -301,6 +301,88 @@
   font-size: 0.9rem;
 }
 
+/* Buttons & Admin Controls */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(118, 75, 162, 0.25);
+}
+
+.btn-primary:hover { transform: translateY(-1px); filter: brightness(1.03); }
+
+.btn-secondary {
+  background: #f3f4f6;
+  color: #1f2937;
+}
+
+.btn-secondary:hover { background: #e5e7eb; }
+
+.btn-small {
+  padding: 8px 12px;
+  font-size: 13px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+.btn-info { background: #3b82f6; color: #fff; }
+.btn-info:hover { background: #2563eb; transform: translateY(-1px); }
+
+.btn-warning { background: #f59e0b; color: #1f2937; }
+.btn-warning:hover { background: #d97706; color: #fff; transform: translateY(-1px); }
+
+.status-select {
+  appearance: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 2px solid #e5e7eb;
+  background: #fff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path fill="%23667eea" d="M5.5 7l4.5 4.5L14.5 7z"/></svg>') no-repeat right 10px center;
+  padding-right: 36px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.status-select:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.12); }
+
+/* Card layout refinements */
+.location-header-card {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.status-badge-container { display: flex; align-items: center; }
+
+.location-content { display: grid; grid-template-columns: 1fr; gap: 14px; }
+
+.location-details .detail-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  padding: 8px 0;
+  border-bottom: 1px dashed #e5e7eb;
+}
+
+.location-details .detail-row:last-child { border-bottom: none; }
+.detail-label { color: #6b7280; font-weight: 600; }
+.detail-value { color: #1f2937; font-weight: 600; }
+.detail-value.location-highlight { color: #667eea; }
+.detail-value.notes { color: #4b5563; font-weight: 500; }
+
+.location-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+
 /* Modal Styles */
 .modal-overlay {
   position: fixed;
@@ -316,7 +398,9 @@
   padding: 20px;
 }
 
-.modal-content {
+/* Support both .modal-content and .modal (component uses .modal) */
+.modal-content,
+.modal {
   background: white;
   border-radius: 20px;
   padding: 30px;
@@ -354,7 +438,8 @@
   font-size: 1.5rem;
 }
 
-.close-btn {
+.close-btn,
+.modal-close {
   background: none;
   border: none;
   font-size: 1.5rem;
@@ -365,7 +450,8 @@
   transition: all 0.3s ease;
 }
 
-.close-btn:hover {
+.close-btn:hover,
+.modal-close:hover {
   background: #f7fafc;
   color: #2d3748;
 }
@@ -421,6 +507,10 @@
   cursor: pointer;
   transition: all 0.3s ease;
 }
+
+/* Support component footer/body classes */
+.modal-body { padding: 4px 0; }
+.modal-footer { display: flex; gap: 12px; margin-top: 10px; }
 
 .save-btn {
   background: #48bb78;
@@ -518,7 +608,8 @@
     grid-template-columns: 1fr;
   }
   
-  .modal-content {
+  .modal-content,
+  .modal {
     margin: 20px;
     padding: 20px;
   }

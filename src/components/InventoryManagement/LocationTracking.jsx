@@ -9,6 +9,11 @@ const LocationTracking = ({ userRole, addNotification }) => {
   const [statusFilter, setStatusFilter] = useState('all');
   const [showLocationModal, setShowLocationModal] = useState(false);
   const [selectedEquipment, setSelectedEquipment] = useState(null);
+  const [showMoveModal, setShowMoveModal] = useState(false);
+  const [moveForm, setMoveForm] = useState({
+    department: '',
+    location: ''
+  });
 
   const [newLocation, setNewLocation] = useState({
     equipmentId: '',
@@ -220,6 +225,25 @@ const LocationTracking = ({ userRole, addNotification }) => {
     addNotification('Di chuyển thiết bị thành công!', 'success');
   };
 
+  const openMoveModal = (equipment) => {
+    setSelectedEquipment(equipment)
+    setMoveForm({
+      department: equipment.department || '',
+      location: equipment.location || ''
+    })
+    setShowMoveModal(true)
+  }
+
+  const submitMove = () => {
+    if (!moveForm.location || !moveForm.department) {
+      addNotification('Vui lòng nhập đầy đủ vị trí và phòng ban', 'error');
+      return;
+    }
+    handleMoveEquipment(selectedEquipment.id, moveForm.location, moveForm.department)
+    setShowMoveModal(false)
+    setSelectedEquipment(null)
+  }
+
   const handleStatusChange = (equipmentId, newStatus) => {
     setEquipmentLocations(prev => prev.map(item => 
       item.id === equipmentId ? { ...item, status: newStatus } : item
@@ -346,13 +370,7 @@ const LocationTracking = ({ userRole, addNotification }) => {
                     <>
                       <button 
                         className="btn-small btn-warning"
-                        onClick={() => {
-                          const newLocation = prompt('Nhập vị trí mới:');
-                          const newDepartment = prompt('Nhập phòng ban mới:');
-                          if (newLocation && newDepartment) {
-                            handleMoveEquipment(item.id, newLocation, newDepartment);
-                          }
-                        }}
+                        onClick={() => openMoveModal(item)}
                         title="Di chuyển thiết bị"
                       >
                         🚚 Di chuyển
@@ -534,8 +552,58 @@ const LocationTracking = ({ userRole, addNotification }) => {
         </div>
       )}
 
+      {/* Move Equipment Modal */}
+      {showMoveModal && selectedEquipment && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <div className="modal-header">
+              <h3>🚚 Di chuyển thiết bị</h3>
+              <button 
+                className="modal-close"
+                onClick={() => { setShowMoveModal(false); setSelectedEquipment(null); }}
+              >
+                ×
+              </button>
+            </div>
+            <div className="modal-body">
+              <div className="form-group">
+                <label>Thiết bị</label>
+                <input type="text" value={`${selectedEquipment.equipmentName} (ID: ${selectedEquipment.equipmentId})`} disabled />
+              </div>
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Phòng ban mới *</label>
+                  <select
+                    value={moveForm.department}
+                    onChange={(e) => setMoveForm({ ...moveForm, department: e.target.value })}
+                  >
+                    <option value="">Chọn phòng ban</option>
+                    {departments.map(dept => (
+                      <option key={dept} value={dept}>{dept}</option>
+                    ))}
+                  </select>
+                </div>
+                <div className="form-group">
+                  <label>Vị trí mới *</label>
+                  <input
+                    type="text"
+                    value={moveForm.location}
+                    onChange={(e) => setMoveForm({ ...moveForm, location: e.target.value })}
+                    placeholder="Ví dụ: Tầng 2 - Phòng 205"
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button className="btn btn-secondary" onClick={() => { setShowMoveModal(false); setSelectedEquipment(null); }}>Hủy</button>
+              <button className="btn btn-primary" onClick={submitMove}>Xác nhận di chuyển</button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Equipment Detail Modal */}
-      {selectedEquipment && (
+      {selectedEquipment && !showMoveModal && (
         <div className="modal-overlay">
           <div className="modal">
             <div className="modal-header">

@@ -1,7 +1,11 @@
 import { CONTACT_INFO, FIXED_TEXT } from '../../constants/navigation'
 import './Header.css'
+import { useState } from 'react'
+import ChangePasswordModal from '../UserManagement/ChangePasswordModal'
 
 const Header = ({ userData, onLogout, isLoggedIn }) => {
+  const [showChangePassword, setShowChangePassword] = useState(false)
+
   return (
     <header className="header">
       <div className="header-left">
@@ -29,10 +33,16 @@ const Header = ({ userData, onLogout, isLoggedIn }) => {
                 </span>
               </div>
             </div>
-            <button className="logout-button" onClick={onLogout}>
+            <div className="user-actions">
+              <button className="logout-button" onClick={() => setShowChangePassword(true)}>
+                <span className="logout-icon">🔑</span>
+                <span>Đổi mật khẩu</span>
+              </button>
+              <button className="logout-button" onClick={onLogout}>
               <span className="logout-icon">🚪</span>
               <span>Đăng xuất</span>
-            </button>
+              </button>
+            </div>
           </div>
         ) : (
           <div className="contact-info">
@@ -47,6 +57,13 @@ const Header = ({ userData, onLogout, isLoggedIn }) => {
           </div>
         )}
       </div>
+      {showChangePassword && (
+        <ChangePasswordModal 
+          username={userData?.username}
+          onClose={() => setShowChangePassword(false)}
+          onSuccess={() => setShowChangePassword(false)}
+        />
+      )}
     </header>
   )
 }

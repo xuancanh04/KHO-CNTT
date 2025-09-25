@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { FIXED_TEXT } from '../../constants/navigation'
+import { getEffectivePasswordForUser } from '../../utils/auth'
 import './Banner.css'
 
 const Banner = ({ onLogin }) => {
@@ -104,9 +105,15 @@ const Banner = ({ onLogin }) => {
         ];
 
         // Tìm user trong database
-        const user = userDatabase.find(u => 
-          u.username === credentials.username && u.password === credentials.password
-        );
+        const user = userDatabase.find(u => u.username === credentials.username);
+
+        if (user) {
+          const effectivePassword = getEffectivePasswordForUser(user.username, user.password)
+          if (effectivePassword !== credentials.password) {
+            reject(new Error('Tên đăng nhập hoặc mật khẩu không chính xác'))
+            return
+          }
+        }
 
         if (user) {
           resolve({ 
